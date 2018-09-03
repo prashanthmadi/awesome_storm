@@ -7,3 +7,4 @@ cache:
 
 script:
   - mvn clean install
+  - curl -L https://aka.ms/InstallAzureCli | bash
