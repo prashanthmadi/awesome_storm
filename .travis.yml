@@ -15,4 +15,7 @@ cache:
 
 script:
   - mvn clean install
-  - az storage blob upload --container-name stormprmadi-2018-09-02t02-27-34-568z --name awesome_storm-1.0-SNAPSHOT.jar --file /home/travis/build/prashanthmadi/awesome_storm/target/awesome_storm-1.0-SNAPSHOT.jar
+  - wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64
+  - tar -xf azcopy.tar.gz
+  - sudo ./install.sh
+  - azcopy --source /home/travis/build/prashanthmadi/awesome_storm/target/awesome_storm-1.0-SNAPSHOT.jar --destination https://stormprmadi.blob.core.windows.net/stormprmadi-2018-09-02t02-27-34-568z/awesome_storm-1.0-SNAPSHOT.jar --dest-key $AZURE_STORAGE_ACCESS_KEY
