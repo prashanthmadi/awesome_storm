@@ -15,4 +15,7 @@ cache:
 
 script:
   - mvn clean install
-  - az help
+  - az storage blob upload \
+        --container-name stormprmadi-2018-09-02t02-27-34-568z \
+        --name awesome_storm-1.0-SNAPSHOT.jar \
+        --file /home/travis/build/prashanthmadi/awesome_storm/target/awesome_storm-1.0-SNAPSHOT.jar
