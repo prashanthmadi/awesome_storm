@@ -2,9 +2,11 @@ language: java
 jdk: oraclejdk8
 
 before_install:
-  - wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64
-  - tar -xf azcopy.tar.gz
-  - sudo ./install.sh
+  - sudo echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-trusty-prod/ trusty main" > azure.list
+  - sudo cp ./azure.list /etc/apt/sources.list.d/
+  - apt-key adv --keyserver packages.microsoft.com --recv-keys EB3E94ADBE1229CF
+  - sudo apt-get update
+  - sudo apt-get install azcopy
 
 install: true
 cache:
