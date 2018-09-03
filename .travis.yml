@@ -2,11 +2,9 @@ language: java
 jdk: oraclejdk8
 
 before_install:
-  - sudo apt-get -y install python3-pip python-dev
-  - echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list
-  - curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-  - sudo apt-get install apt-transport-https
-  - sudo apt-get update && sudo apt-get install azure-cli
+  - wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64
+  - tar -xf azcopy.tar.gz
+  - sudo ./install.sh
 
 install: true
 cache:
@@ -15,7 +13,4 @@ cache:
 
 script:
   - mvn clean install
-  - wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64
-  - tar -xf azcopy.tar.gz
-  - sudo ./install.sh
   - azcopy --source /home/travis/build/prashanthmadi/awesome_storm/target/awesome_storm-1.0-SNAPSHOT.jar --destination https://stormprmadi.blob.core.windows.net/stormprmadi-2018-09-02t02-27-34-568z/awesome_storm-1.0-SNAPSHOT.jar --dest-key $AZURE_STORAGE_ACCESS_KEY
